@@ -1,0 +1,13 @@
+
+# RStudio
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# System Files
+*.DS_Store
+
+# IDE
+.idea
+.vscode
