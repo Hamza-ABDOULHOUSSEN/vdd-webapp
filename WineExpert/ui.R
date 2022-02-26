@@ -40,6 +40,7 @@ dashboardPage(
   
   ## BODY
   dashboardBody(
+    plotOutput("histo"),
     plotOutput("gaussienne"),
     plotOutput("sinus")
   )
