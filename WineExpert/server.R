@@ -1,5 +1,5 @@
 library ( shiny )
-
+library(ggplot2)
 
 shinyServer ( function (input , output ) {
   
@@ -12,7 +12,28 @@ shinyServer ( function (input , output ) {
   output$histo <- renderPlot({
     age = student$age
     hist(age, main="Histogramme de l'age des élèves", col="darkblue")
-  })  
+  })
+  
+  # data
+  output$data <- renderPlot({
+    
+    if (input$sexe == "both") {
+      ggplot(student, aes(G3.x, color=sex)) + scale_color_manual(values = c("F" = "red", "M"="blue")) + geom_histogram() + ggtitle("Histogramme") + geom_vline(xintercept = c(mean(student[student$sex == "M", ]$G3.x), mean(student[student$sex == "F", ]$G3.x)), colour = c("blue", "red"), linetype = c("longdash","longdash"))
+    }
+    else {
+      sub = subset(student, sex == input$sexe)
+      
+      if (input$sexe == "M") {
+        couleur = "blue"
+      }
+      else {
+        couleur = "red"
+      }
+      
+      data = sub$G3.x
+      ggplot(sub, aes(G3.x)) + geom_histogram(col=couleur) + ggtitle("Histogramme") + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash")
+    }
+  })
   
   # gaussienne
   output$gaussienne <- renderPlot({
