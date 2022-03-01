@@ -1,5 +1,6 @@
 library(shiny)
 library(shinydashboard)
+library(markdown)
 
 dashboardPage(
   
@@ -11,7 +12,8 @@ dashboardPage(
     sidebarMenu(
       menuItem("Home", tabName = "home", icon = icon("home")),
       menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
-      menuItem("Data", tabName = "data", icon = icon("bar-chart-o")),
+      menuItem("Age", tabName = "age", icon = icon("bar-chart-o")),
+      menuItem("Adress", tabName = "adress", icon = icon("bar-chart-o")),
       menuItem("TD", icon = icon("th"), tabName = "TD",
                badgeLabel = "new", badgeColor = "green")
     )
@@ -23,7 +25,7 @@ dashboardPage(
     tabItems(
       ## HOME PAGE
       tabItem(tabName = "home",
-              h2("Home")
+              includeMarkdown("markdown/home.md")
       ),
       
       ## HISTOGRAMME
@@ -33,12 +35,12 @@ dashboardPage(
       ),
       
       ## DATA
-      tabItem(tabName = "data",
-              h2("Data"),
+      tabItem(tabName = "age",
+              h2("Age"),
               box(
-                title = "Data", status = "primary", solidHeader = TRUE,
+                title = "Age", status = "primary", solidHeader = TRUE,
                 collapsible = TRUE,
-                plotOutput("data")
+                plotOutput("age")
               ),
               box(
                 title = "Inputs", background = "black",
@@ -48,6 +50,31 @@ dashboardPage(
                   choices =  c("les deux" = "both",
                                "homme" = "M",
                                "femme" = "F"),
+                  selected = NULL,
+                  inline = FALSE,
+                  width = '800px'
+                )
+                
+              )
+              
+      ),
+      
+      ## ADRESSE
+      tabItem(tabName = "adress",
+              h2("Adress Rural or Urban"),
+              box(
+                title = "adress", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                plotOutput("adress")
+              ),
+              box(
+                title = "Inputs", background = "black",
+                radioButtons(
+                  "adress",
+                  "adress",
+                  choices =  c("les deux" = "both",
+                               "Urban" = "U",
+                               "Rural" = "R"),
                   selected = NULL,
                   inline = FALSE,
                   width = '800px'

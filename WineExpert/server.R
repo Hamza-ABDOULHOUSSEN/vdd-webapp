@@ -14,8 +14,8 @@ shinyServer ( function (input , output ) {
     hist(age, main="Histogramme de l'age des élèves", col="darkblue")
   })
   
-  # data
-  output$data <- renderPlot({
+  # age
+  output$age <- renderPlot({
     
     if (input$sexe == "both") {
       ggplot(student, aes(G3.x, color=sex)) + scale_color_manual(values = c("F" = "red", "M"="blue")) + geom_histogram() + ggtitle("Histogramme") + geom_vline(xintercept = c(mean(student[student$sex == "M", ]$G3.x), mean(student[student$sex == "F", ]$G3.x)), colour = c("blue", "red"), linetype = c("longdash","longdash"))
@@ -28,6 +28,27 @@ shinyServer ( function (input , output ) {
       }
       else {
         couleur = "red"
+      }
+      
+      data = sub$G3.x
+      ggplot(sub, aes(G3.x)) + geom_histogram(col=couleur) + ggtitle("Histogramme") + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash")
+    }
+  })
+  
+  # adresse
+  output$adress <- renderPlot({
+    
+    if (input$adress == "both") {
+      ggplot(student, aes(G3.x, fill=address, color=address)) + geom_histogram(alpha=0.8) + ggtitle("Histogramme") + geom_vline(xintercept = c(mean(student[student$address == "R", ]$G3.x), mean(student[student$address == "U", ]$G3.x)), colour = c("green", "darkblue"), linetype = c("longdash","longdash"))
+    }
+    else {
+      sub = subset(student, address == input$adress)
+      
+      if (input$adress == "R") {
+        couleur = "green"
+      }
+      else {
+        couleur = "darkblue"
       }
       
       data = sub$G3.x
