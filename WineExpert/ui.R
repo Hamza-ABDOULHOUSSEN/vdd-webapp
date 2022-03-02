@@ -13,6 +13,7 @@ dashboardPage(
       menuItem("Home", tabName = "home", icon = icon("home")),
       menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
       menuItem("Age", tabName = "age", icon = icon("bar-chart-o")),
+      menuItem("Sexe", tabName = "sexe", icon = icon("bar-chart-o")),
       menuItem("Adress", tabName = "adress", icon = icon("bar-chart-o")),
       menuItem("TD", icon = icon("th"), tabName = "TD",
                badgeLabel = "new", badgeColor = "green")
@@ -34,7 +35,7 @@ dashboardPage(
               plotOutput("histo")
       ),
       
-      ## DATA
+      ## AGE
       tabItem(tabName = "age",
               h2("Age"),
               box(
@@ -45,11 +46,36 @@ dashboardPage(
               box(
                 title = "Inputs", background = "black",
                 radioButtons(
-                  "sexe",
-                  "Sexe",
+                  "age",
+                  "age",
                   choices =  c("les deux" = "both",
-                               "homme" = "M",
-                               "femme" = "F"),
+                               "15" = 15,
+                               "16" = 16,
+                               "17" = 17),
+                  selected = NULL,
+                  inline = FALSE,
+                  width = '800px'
+                )
+                
+              )
+              
+      ),
+      
+      ## SEXE
+      tabItem(tabName = "sexe",
+              h2("Sexe homme ou femme"),
+              tabBox(
+                tabPanel("Histogramme", plotOutput("sexe")),
+                tabPanel("Boîte à moustache", plotOutput("sexe_bam"))
+              ),
+              box(
+                title = "Inputs", background = "black",
+                radioButtons(
+                  "sexe",
+                  "sexe",
+                  choices =  c("les deux" = "both",
+                               "Homme" = "M",
+                               "Femme" = "F"),
                   selected = NULL,
                   inline = FALSE,
                   width = '800px'
