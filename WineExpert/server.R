@@ -338,24 +338,13 @@ shinyServer ( function (input , output ) {
     if (is.null(input$file)) {return(NULL)}
     
     student <- read.table(input$file$datapath, sep=";",header=TRUE)
-    variable = input$pstatus
+    variable = input$medu
+      
+    couleur = "#F8766D" 
     
-    if (variable == "both") {
-      ggplot(student, aes(G3, fill=Pstatus, color=Pstatus)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
-    }
-    else {
-      
-      if (variable == "T") {
-        couleur = "#F8766D"
-      }
-      else {
-        couleur = "#00BFC4"
-      }
-      
-      sub = subset(student, Pstatus == variable)
-      data = sub$G3
-      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
-    }
+    sub = subset(student, Medu == variable)
+    data = sub$G3
+    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
   })
   
   output$medu_info <- renderText({ 

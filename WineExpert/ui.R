@@ -160,8 +160,8 @@ dashboardPage(
               ),
               box(
                 title = "Inputs", background = "black",
-                sliderInput("niveau d'education (0 faible)", "medu",
-                            min = 0, max = 5,
+                sliderInput("medu", "niveau d'education (0 faible)",
+                            min = 0, max = 4,
                             value = 0),
               ),
               box(
