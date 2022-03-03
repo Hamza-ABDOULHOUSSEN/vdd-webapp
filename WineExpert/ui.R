@@ -15,6 +15,7 @@ dashboardPage(
       menuItem("Age", tabName = "age", icon = icon("bar-chart-o")),
       menuItem("Sexe", tabName = "sexe", icon = icon("bar-chart-o")),
       menuItem("Milieu d'habitation", tabName = "adress", icon = icon("bar-chart-o")),
+      menuItem("Cohabitation des parents", tabName = "pstatus", icon = icon("bar-chart-o")),
       menuItem("TD", icon = icon("th"), tabName = "TD",
                badgeLabel = "new", badgeColor = "green")
     )
@@ -114,6 +115,34 @@ dashboardPage(
                 title = "info", status = "primary", solidHeader = TRUE,
                 collapsible = TRUE,
                 htmlOutput("adress_info")
+              ),
+              
+      ),
+      
+      ## COHABITATION DES PARENTS
+      tabItem(tabName = "pstatus",
+              h2("Cohabitation des parents Ensemble ou Séparés"),
+              tabBox(
+                tabPanel("Histogramme", plotOutput("pstatus")),
+                tabPanel("Boîte à moustache", plotOutput("pstatus_bam"))
+              ),
+              box(
+                title = "Inputs", background = "black",
+                radioButtons(
+                  "pstatus",
+                  "Cohabitation des parents",
+                  choices =  c("Total" = "both",
+                               "Ensemble" = "T",
+                               "Séparés" = "A"),
+                  selected = NULL,
+                  inline = FALSE,
+                  width = '800px'
+                )
+              ),
+              box(
+                title = "info", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                htmlOutput("pstatus_info")
               ),
               
       ),

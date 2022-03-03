@@ -187,6 +187,71 @@ shinyServer ( function (input , output ) {
             sep="<br/>"))
   })
   
+  # cohab parents
+  output$pstatus <- renderPlot({
+    
+    variable = input$pstatus
+    
+    if (variable == "both") {
+      ggplot(student, aes(G3.x, fill=Pstatus, color=Pstatus)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+    }
+    else {
+      
+      if (variable == "T") {
+        couleur = "#F8766D"
+      }
+      else {
+        couleur = "#00BFC4"
+      }
+      
+      sub = subset(student, Pstatus == variable)
+      data = sub$G3.x
+      ggplot(sub, aes(G3.x)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+    }
+  })
+  
+  output$pstatus_bam <- renderPlot({
+    
+    variable = input$pstatus
+    
+    if (variable == "both") {
+      ggplot(student, aes(G3.x, fill=Pstatus, color=Pstatus)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+    }
+    else {
+      
+      if (variable == "T") {
+        couleur = "#F8766D"
+      }
+      else {
+        couleur = "#00BFC4"
+      }
+      
+      sub = subset(student, Pstatus == variable)
+      data = sub$G3.x
+      ggplot(student, aes(G3.x)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+    }
+  })
+  
+  output$pstatus_info <- renderText({ 
+    
+    var1 = "avec parents ensemble"
+    var2 = "avec parents séparés"
+    sub1 = subset(student, Pstatus == "T")
+    data1 = sub1$G3.x
+    sub2 = subset(student, Pstatus == "A")
+    data2 = sub2$G3.x
+    
+    HTML(
+      paste(paste("nombre ",var1," : ", length(data1)), paste("nombre ",var2," : ", length(data2)), "",
+            paste("moyenne ",var1," : ", round(mean(data1)), digits=2), paste("moyenne ",var2," : ", round(mean(data2), digits=2)), "",
+            paste("min ",var1," : ", min(data1)), paste("min ",var2," : ", min(data2)), "",
+            paste("1er quartile  ",var1," : ", quantile(data1,0.25)), paste("1er quartile  ",var2," : ", quantile(data2,0.25)), "",
+            paste("mediane ",var1," : ", median(data1)), paste("mediane ",var2," : ", median(data2)), "",
+            paste("3eme quartile  ",var1," : ", quantile(data1,0.75)), paste("3eme quartile  ",var2," : ", quantile(data2,0.75)), "",
+            paste("max ",var1," : ", max(data1)), paste("max ",var2," : ", max(data2)), "",
+            sep="<br/>"))
+  })
+  
   # gaussienne
   output$gaussienne <- renderPlot({
     
