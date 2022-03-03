@@ -14,6 +14,18 @@ shinyServer ( function (input , output ) {
     hist(age, main="Histogramme de l'age des élèves", col="darkblue")
   })
   
+  output$home_info <- renderText({ 
+    
+    var1 = "données"
+    L = attributes(student)
+    
+    HTML(
+      paste(paste("nombre de colonne : ", length(student)),
+            paste(L$names),
+            paste("nombre d'étudiant (ligne) : ", length(student$age)),
+            sep="<br/>"))
+  })
+  
   # age
   output$age <- renderPlot({
     
@@ -81,6 +93,26 @@ shinyServer ( function (input , output ) {
       ggplot(student, aes(G3.x)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
     }
   })
+  
+  output$sexe_info <- renderText({ 
+    
+    var1 = "homme"
+    var2 = "femme"
+    sub1 = subset(student, sex == "M")
+    data1 = sub1$G3.x
+    sub2 = subset(student, sex == "F")
+    data2 = sub2$G3.x
+    
+    HTML(
+      paste(paste("nombre ",var1," : ", length(data1)), paste("nombre ",var2," : ", length(data2)), "",
+            paste("moyenne ",var1," : ", round(mean(data1)), digits=2), paste("moyenne ",var2," : ", round(mean(data2), digits=2)), "",
+            paste("min ",var1," : ", min(data1)), paste("min ",var2," : ", min(data2)), "",
+            paste("1er quartile  ",var1," : ", quantile(data1,0.25)), paste("1er quartile  ",var2," : ", quantile(data2,0.25)), "",
+            paste("mediane ",var1," : ", median(data1)), paste("mediane ",var2," : ", median(data2)), "",
+            paste("3eme quartile  ",var1," : ", quantile(data1,0.75)), paste("3eme quartile  ",var2," : ", quantile(data2,0.75)), "",
+            paste("max ",var1," : ", max(data1)), paste("max ",var2," : ", max(data2)), "",
+            sep="<br/>"))
+    })
   
   # adresse
   output$adress <- renderPlot({

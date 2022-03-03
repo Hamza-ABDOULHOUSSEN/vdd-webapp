@@ -26,7 +26,8 @@ dashboardPage(
     tabItems(
       ## HOME PAGE
       tabItem(tabName = "home",
-              includeMarkdown("markdown/home.md")
+              includeMarkdown("markdown/home.md"),
+              htmlOutput("home_info")
       ),
       
       ## HISTOGRAMME
@@ -80,8 +81,12 @@ dashboardPage(
                   inline = FALSE,
                   width = '800px'
                 )
-                
-              )
+              ),
+              box(
+                title = "info", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                htmlOutput("sexe_info")
+              ),
               
       ),
       
