@@ -132,7 +132,7 @@ shinyServer ( function (input , output ) {
     }
     else {
       
-      if (variable == "R") {
+      if (variable == "U") {
         couleur = "#F8766D"
       }
       else {
@@ -141,8 +141,50 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, address == variable)
       data = sub$G3.x
-      ggplot(student, aes(G3.x)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(sub, aes(G3.x)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
     }
+  })
+  
+  output$adress_bam <- renderPlot({
+    
+    variable = input$adress
+    
+    if (variable == "both") {
+      ggplot(student, aes(G3.x, fill=address, color=address)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+    }
+    else {
+      
+      if (variable == "F") {
+        couleur = "#F8766D"
+      }
+      else {
+        couleur = "#00BFC4"
+      }
+      
+      sub = subset(student, address == variable)
+      data = sub$G3.x
+      ggplot(student, aes(G3.x)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+    }
+  })
+  
+  output$adress_info <- renderText({ 
+    
+    var1 = "milieu rural"
+    var2 = "milieu urbain"
+    sub1 = subset(student, address == "R")
+    data1 = sub1$G3.x
+    sub2 = subset(student, address == "U")
+    data2 = sub2$G3.x
+    
+    HTML(
+      paste(paste("nombre ",var1," : ", length(data1)), paste("nombre ",var2," : ", length(data2)), "",
+            paste("moyenne ",var1," : ", round(mean(data1)), digits=2), paste("moyenne ",var2," : ", round(mean(data2), digits=2)), "",
+            paste("min ",var1," : ", min(data1)), paste("min ",var2," : ", min(data2)), "",
+            paste("1er quartile  ",var1," : ", quantile(data1,0.25)), paste("1er quartile  ",var2," : ", quantile(data2,0.25)), "",
+            paste("mediane ",var1," : ", median(data1)), paste("mediane ",var2," : ", median(data2)), "",
+            paste("3eme quartile  ",var1," : ", quantile(data1,0.75)), paste("3eme quartile  ",var2," : ", quantile(data2,0.75)), "",
+            paste("max ",var1," : ", max(data1)), paste("max ",var2," : ", max(data2)), "",
+            sep="<br/>"))
   })
   
   # gaussienne

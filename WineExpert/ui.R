@@ -14,7 +14,7 @@ dashboardPage(
       menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
       menuItem("Age", tabName = "age", icon = icon("bar-chart-o")),
       menuItem("Sexe", tabName = "sexe", icon = icon("bar-chart-o")),
-      menuItem("Adress", tabName = "adress", icon = icon("bar-chart-o")),
+      menuItem("Milieu d'habitation", tabName = "adress", icon = icon("bar-chart-o")),
       menuItem("TD", icon = icon("th"), tabName = "TD",
                badgeLabel = "new", badgeColor = "green")
     )
@@ -92,26 +92,29 @@ dashboardPage(
       
       ## ADRESSE
       tabItem(tabName = "adress",
-              h2("Adress Rural or Urban"),
-              box(
-                title = "adress", status = "primary", solidHeader = TRUE,
-                collapsible = TRUE,
-                plotOutput("adress")
+              h2("Milieu d'habitation Rural ou Urbain"),
+              tabBox(
+                tabPanel("Histogramme", plotOutput("adress")),
+                tabPanel("Boîte à moustache", plotOutput("adress_bam"))
               ),
               box(
                 title = "Inputs", background = "black",
                 radioButtons(
                   "adress",
-                  "adress",
-                  choices =  c("les deux" = "both",
-                               "Urban" = "U",
-                               "Rural" = "R"),
+                  "Milieu d'habitation",
+                  choices =  c("Total" = "both",
+                               "Rural" = "R",
+                               "Urbain" = "U"),
                   selected = NULL,
                   inline = FALSE,
                   width = '800px'
                 )
-                
-              )
+              ),
+              box(
+                title = "info", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                htmlOutput("adress_info")
+              ),
               
       ),
       
