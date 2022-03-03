@@ -11,3 +11,6 @@ On cherche à analyser les notes des élèves en fonction de différents attribu
 - Sexe (homme ou femme)
 - Milieu (rural ou urbain)
 
+## Chargement info données
+
+

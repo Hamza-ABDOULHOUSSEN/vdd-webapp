@@ -17,13 +17,21 @@ shinyServer ( function (input , output ) {
   output$home_info <- renderText({ 
     
     var1 = "données"
-    L = attributes(student)
+    L = attributes(mat)
     
     HTML(
-      paste(paste("nombre de colonne : ", length(student)),
-            paste(L$names),
-            paste("nombre d'étudiant (ligne) : ", length(student$age)),
-            sep="<br/>"))
+      paste(paste("nombre de colonne : ", length(mat)),
+            paste("nombre d'étudiant (ligne) : ", length(mat$age)),
+            "",
+            "<details> <summary> <b> liste des colonnes <b/> </summary>",
+            sep="<br/>",
+            paste0(L$names,
+                   sep="<br/>",
+                   collapse= ""
+            ),
+            "</details>"
+            )
+      )
   })
   
   # age
@@ -68,7 +76,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, sex == variable)
       data = sub$G3.x
-      ggplot(student, aes(G3.x)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(sub, aes(G3.x)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
     }
   })
   
