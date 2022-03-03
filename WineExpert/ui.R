@@ -15,7 +15,8 @@ dashboardPage(
       menuItem("Sexe", tabName = "sexe", icon = icon("bar-chart-o")),
       menuItem("Milieu d'habitation", tabName = "adress", icon = icon("bar-chart-o")),
       menuItem("Cohabitation des parents", tabName = "pstatus", icon = icon("bar-chart-o")),
-      menuItem("Education de la mère", tabName = "medu", icon = icon("bar-chart-o"))
+      menuItem("Education de la mère", tabName = "medu", icon = icon("bar-chart-o")),
+      menuItem("Education du père", tabName = "fedu", icon = icon("bar-chart-o"))
     )
   ),
   
@@ -168,6 +169,27 @@ dashboardPage(
                 title = "info", status = "primary", solidHeader = TRUE,
                 collapsible = TRUE,
                 htmlOutput("medu_info")
+              ),
+              
+      ),
+      
+      ## FATHER EDUCATION
+      tabItem(tabName = "fedu",
+              h2("Education du père"),
+              tabBox(
+                tabPanel("Histogramme", plotOutput("fedu")),
+                tabPanel("Boîte à moustache", plotOutput("fedu_bam"))
+              ),
+              box(
+                title = "Inputs", background = "black",
+                sliderInput("fedu", "niveau d'education (0 faible)",
+                            min = 0, max = 4,
+                            value = 0),
+              ),
+              box(
+                title = "info", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                htmlOutput("fedu_info")
               ),
               
       )
