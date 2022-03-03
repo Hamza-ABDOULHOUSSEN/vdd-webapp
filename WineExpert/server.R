@@ -166,16 +166,10 @@ shinyServer ( function (input , output ) {
     
     corr<-c(a,b,c,d,e,f,g,h,i)
     x<-1:length(corr)
-    par(xaxt="n")
-    plot(x,corr, pch=21,bg='red',col='blue',cex=3)
-    lablist.x<-as.vector(c("zero", "twenty", "forty", "sixty", "eighty", "one hundred","7","8","9"))
-    lablist.y<-as.vector(c(1:9))
-    axis(1, at=seq(1, 9, by=1), labels = FALSE)
-    text(y = seq(1, 9, by=1), par("usr")[3] - 0.2, labels = lablist.y, srt = 45, pos = 1, xpd = TRUE)
-    axis(2, at=seq(0, 100, by=20), labels = FALSE)
-    text(x = seq(0, 100, by=20), par("usr")[1], labels = lablist.x, srt = 45, pos = 2, xpd = TRUE)
-    
-    par(original.parameters)
+    info<-c("alcool_work","alcool_week","studytime","travel","family_relation","age","mother_ed","father_ed","abs")
+    plot(x,corr, xaxt="n", pch=21,bg='red',col='blue',cex=3)
+    axis(1, at=1:9, labels=info)
+  
   })
   
   # gaussienne
