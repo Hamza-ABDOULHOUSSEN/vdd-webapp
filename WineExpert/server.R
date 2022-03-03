@@ -181,32 +181,33 @@ shinyServer ( function (input , output ) {
       if(type=="sw"){
         y<-shapiro.test(mat$age)
         HTML(
-          paste("test of normality distribution for the age : ",y$p.value )
-        )
+          paste(paste("test of normality distribution for the age : ",y$p.value),"",
+                sep="<br/>")) 
       }
     }
     if(variable=="famrel"){
       if(type=="sw"){
         y<-shapiro.test(mat$famrel)
         HTML(
-          paste("test of normality distribution for the family relation : ",y$p.value )
-        )
+          paste(paste("test of normality distribution for the family relation : ",y$p.value ),"",
+                sep="<br/>"))
       }
     }
     if(variable=="absences"){
       if(type=="sw"){
         y<-shapiro.test(mat$absences)
         HTML(
-          paste(paste("test of normality distribution for the absences : ",y$p.value ),"",sep="<br/>")
-        )
+          paste(paste("test of normality distribution for the absences : ",y$p.value ),"",
+                sep="<br/>"))
+        
       }
     }
     if(variable=="G3"){
       if(type=="sw"){
         y<-shapiro.test(mat$G3)
         HTML(
-          paste(paste("test of normality distribution for the notes : ",y$p.value ),"",sep="<br/>")
-        )
+          paste(paste("test of normality distribution for the notes : ",y$p.value ),"",
+                sep="<br/>"))
       }
     }
     
