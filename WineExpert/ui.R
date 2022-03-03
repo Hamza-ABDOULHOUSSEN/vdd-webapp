@@ -16,6 +16,7 @@ dashboardPage(
       menuItem("Sexe", tabName = "sexe", icon = icon("bar-chart-o")),
       menuItem("Adresse", tabName = "adresse", icon = icon("bar-chart-o")),
       menuItem("Analyse_bivariee", tabName = "Analyse_bivariee", icon = icon("bar-chart-o")),
+      menuItem("unidimentional", tabName = "unidimentional", icon = icon("bar-chart-o")),
       menuItem("TD", icon = icon("th"), tabName = "TD",
                badgeLabel = "new", badgeColor = "green")
     )
@@ -158,6 +159,24 @@ dashboardPage(
               ),
               
       ),
+      
+      ## analyse unidimentionnelle
+      tabItem(tabName = "unidimentional",
+              h2("Analyse unidimentionelle"),
+              box(
+                title = "unidimentional", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                plotOutput("unidimentional")
+              ),
+              box(
+                title = "info on final grade", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                htmlOutput("univ_info")
+              ),
+
+              
+      ),
+      
       
       ## TD PAGE
       tabItem(tabName = "TD",

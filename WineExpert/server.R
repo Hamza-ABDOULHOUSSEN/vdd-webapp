@@ -180,9 +180,9 @@ shinyServer ( function (input , output ) {
     if(variable=="age"){
       if(type=="sw"){
         y<-shapiro.test(mat$age)
-        
-        paste("test of normality distribution for the age : ",y$p.value )
-        
+        HTML(
+          paste("test of normality distribution for the age : ",y$p.value )
+        )
       }
     }
     if(variable=="famrel"){
@@ -210,9 +210,39 @@ shinyServer ( function (input , output ) {
       }
     }
     
-    
-    
   })
+  
+  
+  #analyse univariable
+  
+  output$univ_info<-renderText({ 
+    
+    var1 = "homme"
+    var2 = "femme"
+    sub1 = subset(student, romantic.x == "yes")
+    data1 = sub1$G3.x
+    sub2 = subset(student, romantic.x == "no")
+    data2 = sub2$G3.x
+    
+    
+    
+    HTML(
+      paste(paste("nombre ",var1," : ", length(data1)), paste("nombre ",var2," : ", length(data2)), "",
+            paste("moyenne ",var1," : ", round(mean(data1)), digits=2), paste("moyenne ",var2," : ", round(mean(data2), digits=2)), "",
+            paste("min ",var1," : ", min(data1)), paste("min ",var2," : ", min(data2)), "",
+            paste("1er quartile  ",var1," : ", quantile(data1,0.25)), paste("1er quartile  ",var2," : ", quantile(data2,0.25)), "",
+            paste("mediane ",var1," : ", median(data1)), paste("mediane ",var2," : ", median(data2)), "",
+            paste("3eme quartile  ",var1," : ", quantile(data1,0.75)), paste("3eme quartile  ",var2," : ", quantile(data2,0.75)), "",
+            paste("max ",var1," : ", max(data1)), paste("max ",var2," : ", max(data2)), "",
+            sep="<br/>"))
+    
+
+    
+    
+    
+    
+    })
+  
   
   # gaussienne
   output$gaussienne <- renderPlot({
