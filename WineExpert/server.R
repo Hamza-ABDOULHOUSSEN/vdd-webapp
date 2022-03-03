@@ -137,6 +137,47 @@ shinyServer ( function (input , output ) {
     }
   })
   
+  
+  #analyse bivariee
+  output$correlation <- renderPlot({
+    
+    x<-mat$G3
+    alco<-mat$Dalc
+    alc2<-mat$Walc
+    stt<-mat$studytime
+    trav<-mat$traveltime
+    fam<-mat$famrel
+    age<-mat$age
+    med<-mat$Medu
+    fef<-mat$Fedu
+    abs<-mat$absences
+    
+    a=cor(x,alco)
+    b=cor(x,alc2)
+    c=cor(x,stt)
+    d=cor(x,trav)
+    e=cor(x,fam)
+    f=cor(x,age)
+    g=cor(x,med)
+    h=cor(x,fef)
+    i=cor(x,abs)
+    
+    
+    
+    corr<-c(a,b,c,d,e,f,g,h,i)
+    x<-1:length(corr)
+    par(xaxt="n")
+    plot(x,corr, pch=21,bg='red',col='blue',cex=3)
+    lablist.x<-as.vector(c("zero", "twenty", "forty", "sixty", "eighty", "one hundred","7","8","9"))
+    lablist.y<-as.vector(c(1:9))
+    axis(1, at=seq(1, 9, by=1), labels = FALSE)
+    text(y = seq(1, 9, by=1), par("usr")[3] - 0.2, labels = lablist.y, srt = 45, pos = 1, xpd = TRUE)
+    axis(2, at=seq(0, 100, by=20), labels = FALSE)
+    text(x = seq(0, 100, by=20), par("usr")[1], labels = lablist.x, srt = 45, pos = 2, xpd = TRUE)
+    
+    par(original.parameters)
+  })
+  
   # gaussienne
   output$gaussienne <- renderPlot({
     

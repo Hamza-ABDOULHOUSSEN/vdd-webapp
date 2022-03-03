@@ -15,6 +15,7 @@ dashboardPage(
       menuItem("Age", tabName = "age", icon = icon("bar-chart-o")),
       menuItem("Sexe", tabName = "sexe", icon = icon("bar-chart-o")),
       menuItem("Adress", tabName = "adress", icon = icon("bar-chart-o")),
+      menuItem("Analyse_bivariee", tabName = "Analyse_bivariee", icon = icon("bar-chart-o")),
       menuItem("TD", icon = icon("th"), tabName = "TD",
                badgeLabel = "new", badgeColor = "green")
     )
@@ -91,10 +92,10 @@ dashboardPage(
       ),
       
       ## ADRESSE
-      tabItem(tabName = "adress",
-              h2("Adress Rural or Urban"),
+      tabItem(tabName = "adresse",
+              h2("Adresse Rural ou Urbain"),
               box(
-                title = "adress", status = "primary", solidHeader = TRUE,
+                title = "adresse", status = "primary", solidHeader = TRUE,
                 collapsible = TRUE,
                 plotOutput("adress")
               ),
@@ -112,6 +113,17 @@ dashboardPage(
                 )
                 
               )
+              
+      ),
+      
+      ## Analyse bivariee
+      tabItem(tabName = "Analyse_bivariee",
+              h2("Correlation avec la moyenne"),
+              box(
+                title = "correlation", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                plotOutput("correlation")
+              ),
               
       ),
       
