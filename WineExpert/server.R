@@ -215,10 +215,20 @@ shinyServer ( function (input , output ) {
   
   #analyse univariable
   
+  output$unidimentional <- renderPlot({
+    sub1 = subset(student, romantic.x == "yes")
+    data1 = sub1$G3.x
+    couleur='#dea024'
+    ggplot(student,aes(G3.x, fill= romantic.x, color=romantic.x))+ geom_density(data=student, fill=couleur, alpha=0.3)  + scale_x_continuous(name="Final result", breaks=seq(0,20,1)) + scale_y_continuous(name="Number of student")
+
+  })
+  
+  
+  
   output$univ_info<-renderText({ 
     
-    var1 = "homme"
-    var2 = "femme"
+    var1 = "in relationship"
+    var2 = "single"
     sub1 = subset(student, romantic.x == "yes")
     data1 = sub1$G3.x
     sub2 = subset(student, romantic.x == "no")
@@ -227,13 +237,18 @@ shinyServer ( function (input , output ) {
     
     
     HTML(
-      paste(paste("nombre ",var1," : ", length(data1)), paste("nombre ",var2," : ", length(data2)), "",
-            paste("moyenne ",var1," : ", round(mean(data1)), digits=2), paste("moyenne ",var2," : ", round(mean(data2), digits=2)), "",
+      paste(paste("Position study :"),"",
+            paste("number ",var1," : ", length(data1)), paste("number ",var2," : ", length(data2)), "",
+            paste("mean ",var1," : ", round(mean(data1)), digits=2), paste("mean ",var2," : ", round(mean(data2), digits=2)), "",
             paste("min ",var1," : ", min(data1)), paste("min ",var2," : ", min(data2)), "",
-            paste("1er quartile  ",var1," : ", quantile(data1,0.25)), paste("1er quartile  ",var2," : ", quantile(data2,0.25)), "",
-            paste("mediane ",var1," : ", median(data1)), paste("mediane ",var2," : ", median(data2)), "",
-            paste("3eme quartile  ",var1," : ", quantile(data1,0.75)), paste("3eme quartile  ",var2," : ", quantile(data2,0.75)), "",
+            paste("1st quartile  ",var1," : ", quantile(data1,0.25)), paste("1st quartile  ",var2," : ", quantile(data2,0.25)), "",
+            paste("median ",var1," : ", median(data1)), paste("median ",var2," : ", median(data2)), "",
+            paste("3rd quartile  ",var1," : ", quantile(data1,0.75)), paste("3rd quartile  ",var2," : ", quantile(data2,0.75)), "",
             paste("max ",var1," : ", max(data1)), paste("max ",var2," : ", max(data2)), "",
+            paste("scattering study :"),"",
+            paste("variance  ",var1," : ", round(var(data1),digits = 2)), paste("variance ",var2," : ", round(var(data2),digits = 2)), "",
+            paste("coefficient of variation ",var1," : ", round(sqrt(var(data1))/mean(data1),digits=2)), paste("coefficient of variation ",var2," : ", round(sqrt(var(data2))/mean(data2),digits=2)), "",
+            paste("interquartil  ",var1," : ", quantile(data1,0.75)-quantile(data1,0.25)), paste("interquartil ",var2," : ", quantile(data2,0.75)-quantile(data2,0.25)), "",
             sep="<br/>"))
     
 
