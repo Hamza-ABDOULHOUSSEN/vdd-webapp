@@ -11,14 +11,16 @@ dashboardPage(
   dashboardSidebar(
     sidebarMenu(
       menuItem("Home", tabName = "home", icon = icon("home")),
-      menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
       menuItem("Age", tabName = "age", icon = icon("bar-chart-o")),
       menuItem("Sexe", tabName = "sexe", icon = icon("bar-chart-o")),
-      menuItem("Adresse", tabName = "adresse", icon = icon("bar-chart-o")),
+      menuItem("Milieu d'habitation", tabName = "adress", icon = icon("bar-chart-o")),
+      menuItem("Cohabitation des parents", tabName = "pstatus", icon = icon("bar-chart-o")),
+      menuItem("Education de la mère", tabName = "medu", icon = icon("bar-chart-o")),
+      menuItem("Education du père", tabName = "fedu", icon = icon("bar-chart-o")),
+      menuItem("Qualité des relations familiales", tabName = "famrel", icon = icon("bar-chart-o")),
+      menuItem("Temps libre", tabName = "freetime", icon = icon("bar-chart-o")),
       menuItem("Analyse_bivariee", tabName = "Analyse_bivariee", icon = icon("bar-chart-o")),
       menuItem("unidimentional", tabName = "unidimentional", icon = icon("bar-chart-o")),
-      menuItem("TD", icon = icon("th"), tabName = "TD",
-               badgeLabel = "new", badgeColor = "green")
     )
   ),
   
@@ -29,29 +31,31 @@ dashboardPage(
       ## HOME PAGE
       tabItem(tabName = "home",
               includeMarkdown("markdown/home.md"),
+              fileInput(
+                "file",
+                "charger un fichier",
+                multiple = FALSE,
+                accept = NULL,
+                width = NULL,
+                buttonLabel = "Browse...",
+                placeholder = "No file selected"
+              ),
               htmlOutput("home_info")
       ),
-      
-      ## HISTOGRAMME
-      tabItem(tabName = "dashboard",
-              h2("Dashboard tab content"),
-              plotOutput("histo")
-      ),
-      
+
       ## AGE
       tabItem(tabName = "age",
               h2("Age"),
-              box(
-                title = "Age", status = "primary", solidHeader = TRUE,
-                collapsible = TRUE,
-                plotOutput("age")
+              tabBox(
+                tabPanel("Histogramme", plotOutput("age")),
+                tabPanel("Boîte à moustache", plotOutput("age_bam"))
               ),
               box(
                 title = "Inputs", background = "black",
                 radioButtons(
                   "age",
-                  "age",
-                  choices =  c("les deux" = "both",
+                  "Age",
+                  choices =  c("Total" = "both",
                                "15" = 15,
                                "16" = 16,
                                "17" = 17),
@@ -59,8 +63,12 @@ dashboardPage(
                   inline = FALSE,
                   width = '800px'
                 )
-                
-              )
+              ),
+              box(
+                title = "info", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                htmlOutput("age_info")
+              ),
               
       ),
       
@@ -76,7 +84,7 @@ dashboardPage(
                 radioButtons(
                   "sexe",
                   "sexe",
-                  choices =  c("les deux" = "both",
+                  choices =  c("Total" = "both",
                                "Homme" = "M",
                                "Femme" = "F"),
                   selected = NULL,
@@ -92,31 +100,147 @@ dashboardPage(
               
       ),
       
+      
       ## ADRESSE
-      tabItem(tabName = "adresse",
-              h2("Adresse Rural ou Urbain"),
-              box(
-                title = "adresse", status = "primary", solidHeader = TRUE,
-                collapsible = TRUE,
-                plotOutput("adress")
+      tabItem(tabName = "adress",
+              h2("Milieu d'habitation Rural ou Urbain"),
+              tabBox(
+                tabPanel("Histogramme", plotOutput("adress")),
+                tabPanel("Boîte à moustache", plotOutput("adress_bam"))
               ),
               box(
                 title = "Inputs", background = "black",
                 radioButtons(
                   "adress",
-                  "adress",
-                  choices =  c("les deux" = "both",
-                               "Urban" = "U",
-                               "Rural" = "R"),
+                  "Milieu d'habitation",
+                  choices =  c("Total" = "both",
+                               "Rural" = "R",
+                               "Urbain" = "U"),
                   selected = NULL,
                   inline = FALSE,
                   width = '800px'
                 )
-                
-              )
+              ),
+              box(
+                title = "info", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                htmlOutput("adress_info")
+              ),
+
+      ),
+
+      ## COHABITATION DES PARENTS
+      tabItem(tabName = "pstatus",
+              h2("Cohabitation des parents Ensemble ou Séparés"),
+              tabBox(
+                tabPanel("Histogramme", plotOutput("pstatus")),
+                tabPanel("Boîte à moustache", plotOutput("pstatus_bam"))
+              ),
+              box(
+                title = "Inputs", background = "black",
+                radioButtons(
+                  "pstatus",
+                  "Cohabitation des parents",
+                  choices =  c("Total" = "both",
+                               "Ensemble" = "T",
+                               "Séparés" = "A"),
+                  selected = NULL,
+                  inline = FALSE,
+                  width = '800px'
+                )
+              ),
+              box(
+                title = "info", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                htmlOutput("pstatus_info")
+              ),
+
+      ),
+
+      ## MOTHER EDUCATION
+      tabItem(tabName = "medu",
+              h2("Education de la mère"),
+              tabBox(
+                tabPanel("Histogramme", plotOutput("medu")),
+                tabPanel("Boîte à moustache", plotOutput("medu_bam"))
+              ),
+              box(
+                title = "Inputs", background = "black",
+                sliderInput("medu", "niveau d'education (0 faible)",
+                            min = 0, max = 4,
+                            value = 0),
+              ),
+              box(
+                title = "info", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                htmlOutput("medu_info")
+              ),
+
+      ),
+
+      ## FATHER EDUCATION
+      tabItem(tabName = "fedu",
+              h2("Education du père"),
+              tabBox(
+                tabPanel("Histogramme", plotOutput("fedu")),
+                tabPanel("Boîte à moustache", plotOutput("fedu_bam"))
+              ),
+              box(
+                title = "Inputs", background = "black",
+                sliderInput("fedu", "niveau d'education (0 faible)",
+                            min = 0, max = 4,
+                            value = 0),
+              ),
+              box(
+                title = "info", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                htmlOutput("fedu_info")
+              ),
+
+      ),
+
+      ## FAMREL
+      tabItem(tabName = "famrel",
+              h2("Qualité des relations familiales"),
+              tabBox(
+                tabPanel("Histogramme", plotOutput("famrel")),
+                tabPanel("Boîte à moustache", plotOutput("famrel_bam"))
+              ),
+              box(
+                title = "Inputs", background = "black",
+                sliderInput("famrel", "qualité de la relation familiale (1 faible)",
+                            min = 1, max = 5,
+                            value = 0),
+              ),
+              box(
+                title = "info", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                htmlOutput("famrel_info")
+              ),
+
+      ),
+
+      ## FREETIME
+      tabItem(tabName = "freetime",
+              h2("Temps libre après les cours"),
+              tabBox(
+                tabPanel("Histogramme", plotOutput("freetime")),
+                tabPanel("Boîte à moustache", plotOutput("freetime_bam"))
+              ),
+              box(
+                title = "Inputs", background = "black",
+                sliderInput("freetime", "Temps libre après les cours (1 faible)",
+                            min = 1, max = 5,
+                            value = 0),
+              ),
+              box(
+                title = "info", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                htmlOutput("freetime_info")
+              ),
               
       ),
-      
+
       ## Analyse bivariee
       tabItem(tabName = "Analyse_bivariee",
               h2("Correlation avec la moyenne"),
@@ -125,7 +249,7 @@ dashboardPage(
                 collapsible = TRUE,
                 plotOutput("correlation")
               ),
-              
+
               box(
                 title = "Inputs", background = "black",
                 radioButtons(
@@ -139,7 +263,7 @@ dashboardPage(
                   inline = FALSE,
                   width = '800px'
                 ),
-                
+
                 radioButtons(
                   "types",
                   "types",
@@ -149,17 +273,17 @@ dashboardPage(
                   inline = FALSE,
                   width = '800px'
                 )
-                
+
               ),
-              
+
               box(
                 title = "info", status = "primary", solidHeader = TRUE,
                 collapsible = TRUE,
                 htmlOutput("analyse_info")
               ),
-              
+
       ),
-      
+
       ## analyse unidimentionnelle
       tabItem(tabName = "unidimentional",
               h2("Analyse unidimentionelle"),
@@ -174,56 +298,9 @@ dashboardPage(
                 htmlOutput("univ_info")
               ),
 
-              
-      ),
-      
-      
-      ## TD PAGE
-      tabItem(tabName = "TD",
-              h2("TD"),
-              
-              box(
-                title = "Gauss", status = "primary", solidHeader = TRUE,
-                collapsible = TRUE,
-                plotOutput("gaussienne")
-              ),
-              box(
-                title = "Sinus", status = "primary", solidHeader = TRUE,
-                collapsible = TRUE,
-                plotOutput("sinus")
-              ),
-              box(
-                title = "Inputs", background = "black",
-                numericInput(
-                  "n",
-                  "n",
-                  value=25,
-                  min = 0,
-                  max = NA,
-                  step = 1,
-                  width = NULL
-                ),
-                checkboxInput("check", "relier les points", value = FALSE, width = NULL),
-                radioButtons(
-                  "button",
-                  "couleurs",
-                  choices =  c("rouge" = "red",
-                               "vert" = "green",
-                               "bleu" = "blue"),
-                  selected = NULL,
-                  inline = FALSE,
-                  width = NULL
-                ),
-                sliderInput("epaisseur", "Decimal:",
-                            min = 1, max = 5,
-                            value = 0.5, step = 0.1
-                ),
-                
-                # Button
-                downloadButton("downloadImage", "Download")
-              )
-              
+
       )
+
     )
   )
   
