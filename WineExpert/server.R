@@ -357,7 +357,8 @@ shinyServer ( function (input , output ) {
     data1 = sub1$G3
     
     HTML(
-      paste(paste("nombre ",var1," : ", length(data1)),
+      paste(titre,
+            paste("nombre ",var1," : ", length(data1)),
             paste("moyenne ",var1," : ", round(mean(data1)), digits=2),
             paste("min ",var1," : ", min(data1)),
             paste("1er quartile  ",var1," : ", quantile(data1,0.25)),
@@ -404,13 +405,117 @@ shinyServer ( function (input , output ) {
     data1 = sub1$G3
     
     HTML(
-      paste(paste("nombre ",var1," : ", length(data1)),
+      paste(titre,
+            paste("nombre ",var1," : ", length(data1)),
             paste("moyenne ",var1," : ", round(mean(data1)), digits=2),
             paste("min ",var1," : ", min(data1)),
             paste("1er quartile  ",var1," : ", quantile(data1,0.25)),
             paste("mediane ",var1," : ", median(data1)),
             paste("3eme quartile  ",var1," : ", quantile(data1,0.75)),
             paste("max ",var1," : ", max(data1)),
+            sep="<br/>"))
+  })
+  
+  # FAMREL
+  output$famrel <- renderPlot({
+    if (is.null(input$file)) {return(NULL)}
+    
+    student <- read.table(input$file$datapath, sep=";",header=TRUE)
+    variable = input$famrel
+    
+    couleur = "#F8766D"
+    
+    sub = subset(student, famrel == variable)
+    data = sub$G3
+    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+  })
+  
+  output$famrel_bam <- renderPlot({
+    if (is.null(input$file)) {return(NULL)}
+    
+    student <- read.table(input$file$datapath, sep=";",header=TRUE)
+    variable = input$famrel
+    
+    couleur = "#F8766D" 
+    
+    sub = subset(student, famrel == variable)
+    data = sub$G3
+    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+  })
+  
+  output$famrel_info <- renderText({ 
+    if (is.null(input$file)) {return(NULL)}
+    
+    student <- read.table(input$file$datapath, sep=";",header=TRUE)
+    titre = paste("Niveau d'education ", input$famrel)
+    var1 = ""
+    sub1 = subset(student, famrel == input$famrel)
+    data1 = sub1$G3
+    
+    HTML(
+      paste(titre,
+            paste("nombre ",var1," : ", length(data1)),
+            paste("moyenne ",var1," : ", round(mean(data1)), digits=2),
+            paste("min ",var1," : ", min(data1)),
+            paste("1er quartile  ",var1," : ", quantile(data1,0.25)),
+            paste("mediane ",var1," : ", median(data1)),
+            paste("3eme quartile  ",var1," : ", quantile(data1,0.75)),
+            paste("max ",var1," : ", max(data1)),
+            sep="<br/>"))
+  })
+  
+  # FREETIME
+  
+  output$freetime <- renderPlot({
+    if (is.null(input$file))
+    {
+      return (NULL)}
+    
+    student <- read.table(input$file$datapath, sep = ";", header = TRUE)
+    variable = input$freetime
+    
+    couleur = "#F8766D"
+    
+    sub = subset(student, freetime == variable)
+    data = sub$G3
+    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept=mean(data), colour=couleur, name="Résultat final", breaks=seq(0, 20, 1)) + scale_y_continuous(name="Nombre d'élève")
+  })
+  
+  output$freetime_bam <- renderPlot({
+    if (is.null(input$file))
+    {
+      return (NULL)}
+    
+    student <- read.table(input$file$datapath, sep = ";", header = TRUE)
+    variable = input$freetime
+    
+    couleur = "#F8766D"
+    
+    sub = subset(student, freetime == variable)
+    data = sub$G3
+    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0, 20, 1))
+  })
+  
+  output$freetime_info <- renderText({
+    if (is.null(input$file))
+    {
+      return (NULL)}
+    
+    student <- read.table(input$file$datapath, sep = ";", header = TRUE)
+    titre = paste("Temps libre après les cours ", input$freetime)
+    var1 = ""
+    sub1 = subset(student, freetime == input$freetime)
+    data1 = sub1$G3
+    
+    HTML(
+      paste(titre,
+            paste("nombre ", var1, " : ", length(data1)),
+            paste("moyenne ", var1, " : ", round(mean(data1)), digits=2),
+            paste("min ", var1, " : ", min(data1)),
+            paste("1er quartile  ", var1, " : ", quantile(data1, 0.25)),
+            paste("mediane ", var1, " : ", median(data1)),
+            paste("3eme quartile  ", var1, " : ", quantile(data1, 0.75)),
+            paste("max ", var1, " : ", max(data1)),
             sep="<br/>"))
   })
   

@@ -16,7 +16,9 @@ dashboardPage(
       menuItem("Milieu d'habitation", tabName = "adress", icon = icon("bar-chart-o")),
       menuItem("Cohabitation des parents", tabName = "pstatus", icon = icon("bar-chart-o")),
       menuItem("Education de la mère", tabName = "medu", icon = icon("bar-chart-o")),
-      menuItem("Education du père", tabName = "fedu", icon = icon("bar-chart-o"))
+      menuItem("Education du père", tabName = "fedu", icon = icon("bar-chart-o")),
+      menuItem("Qualité des relations familiales", tabName = "famrel", icon = icon("bar-chart-o")),
+      menuItem("Temps libre", tabName = "freetime", icon = icon("bar-chart-o"))
     )
   ),
   
@@ -190,6 +192,48 @@ dashboardPage(
                 title = "info", status = "primary", solidHeader = TRUE,
                 collapsible = TRUE,
                 htmlOutput("fedu_info")
+              ),
+              
+      ),
+      
+      ## FAMREL
+      tabItem(tabName = "famrel",
+              h2("Qualité des relations familiales"),
+              tabBox(
+                tabPanel("Histogramme", plotOutput("famrel")),
+                tabPanel("Boîte à moustache", plotOutput("famrel_bam"))
+              ),
+              box(
+                title = "Inputs", background = "black",
+                sliderInput("famrel", "qualité de la relation familiale (1 faible)",
+                            min = 1, max = 5,
+                            value = 0),
+              ),
+              box(
+                title = "info", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                htmlOutput("famrel_info")
+              ),
+              
+      ),
+      
+      ## FREETIME
+      tabItem(tabName = "freetime",
+              h2("Temps libre après les cours"),
+              tabBox(
+                tabPanel("Histogramme", plotOutput("freetime")),
+                tabPanel("Boîte à moustache", plotOutput("freetime_bam"))
+              ),
+              box(
+                title = "Inputs", background = "black",
+                sliderInput("freetime", "Temps libre après les cours (1 faible)",
+                            min = 1, max = 5,
+                            value = 0),
+              ),
+              box(
+                title = "info", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                htmlOutput("freetime_info")
               ),
               
       )
