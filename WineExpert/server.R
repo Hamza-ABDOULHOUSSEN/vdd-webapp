@@ -519,4 +519,138 @@ shinyServer ( function (input , output ) {
             sep="<br/>"))
   })
   
+  #analyse bivariee
+  output$correlation <- renderPlot({
+    if (is.null(input$file)) {return(NULL)}
+    
+    student <- read.table(input$file$datapath, sep=";",header=TRUE)
+    
+    x<-student$G3
+    alco<-student$Dalc
+    alc2<-student$Walc
+    stt<-student$studytime
+    trav<-student$traveltime
+    fam<-student$famrel
+    age<-student$age
+    med<-student$Medu
+    fef<-student$Fedu
+    abs<-student$absences
+    
+    a=cor(x,alco)
+    b=cor(x,alc2)
+    c=cor(x,stt)
+    d=cor(x,trav)
+    e=cor(x,fam)
+    f=cor(x,age)
+    g=cor(x,med)
+    h=cor(x,fef)
+    i=cor(x,abs)
+    
+    
+    
+    corr<-c(a,b,c,d,e,f,g,h,i)
+    x<-1:length(corr)
+    info<-c("alcool_work","alcool_week","studytime","travel","family_relation","age","mother_ed","father_ed","abs")
+    plot(x,corr, xaxt="n", pch=21,bg='red',col='blue',cex=3)
+    axis(1, at=1:9, labels=info)
+    
+  })
+  
+  output$analyse_info <- renderText({ 
+    if (is.null(input$file)) {return(NULL)}
+    
+    student <- read.table(input$file$datapath, sep=";",header=TRUE)
+    
+    variable=input$variables
+    type=input$types
+    if(variable=="age"){
+      if(type=="sw"){
+        y<-shapiro.test(student$age)
+        HTML(
+          paste(paste("test of normality distribution for the age : ",y$p.value),"",
+                sep="<br/>")) 
+      }
+    }
+    if(variable=="famrel"){
+      if(type=="sw"){
+        y<-shapiro.test(student$famrel)
+        HTML(
+          paste(paste("test of normality distribution for the family relation : ",y$p.value ),"",
+                sep="<br/>"))
+      }
+    }
+    if(variable=="absences"){
+      if(type=="sw"){
+        y<-shapiro.test(student$absences)
+        HTML(
+          paste(paste("test of normality distribution for the absences : ",y$p.value ),"",
+                sep="<br/>"))
+        
+      }
+    }
+    if(variable=="G3"){
+      if(type=="sw"){
+        y<-shapiro.test(student$G3)
+        HTML(
+          paste(paste("test of normality distribution for the notes : ",y$p.value ),"",
+                sep="<br/>"))
+      }
+    }
+    
+  })
+  
+  
+  #analyse univariable
+  
+  output$unidimentional <- renderPlot({
+    if (is.null(input$file)) {return(NULL)}
+    
+    student <- read.table(input$file$datapath, sep=";",header=TRUE)
+    
+    sub1 = subset(student, romantic == "yes")
+    data1 = sub1$G3
+    couleur='#dea024'
+    ggplot(student,aes(G3, fill= romantic, color=romantic))+ geom_density(data=student, fill=couleur, alpha=0.3)  + scale_x_continuous(name="Final result", breaks=seq(0,20,1)) + scale_y_continuous(name="Number of student")
+    
+  })
+  
+  
+  
+  output$univ_info<-renderText({ 
+    if (is.null(input$file)) {return(NULL)}
+    
+    student <- read.table(input$file$datapath, sep=";",header=TRUE)
+    
+    var1 = "in relationship"
+    var2 = "single"
+    sub1 = subset(student, romantic == "yes")
+    data1 = sub1$G3
+    sub2 = subset(student, romantic == "no")
+    data2 = sub2$G3
+    
+    
+    
+    HTML(
+      paste(paste("Position study :"),"",
+            paste("number ",var1," : ", length(data1)), paste("number ",var2," : ", length(data2)), "",
+            paste("mean ",var1," : ", round(mean(data1)), digits=2), paste("mean ",var2," : ", round(mean(data2), digits=2)), "",
+            paste("min ",var1," : ", min(data1)), paste("min ",var2," : ", min(data2)), "",
+            paste("1st quartile  ",var1," : ", quantile(data1,0.25)), paste("1st quartile  ",var2," : ", quantile(data2,0.25)), "",
+            paste("median ",var1," : ", median(data1)), paste("median ",var2," : ", median(data2)), "",
+            paste("3rd quartile  ",var1," : ", quantile(data1,0.75)), paste("3rd quartile  ",var2," : ", quantile(data2,0.75)), "",
+            paste("max ",var1," : ", max(data1)), paste("max ",var2," : ", max(data2)), "",
+            paste("scattering study :"),"",
+            paste("variance  ",var1," : ", round(var(data1),digits = 2)), paste("variance ",var2," : ", round(var(data2),digits = 2)), "",
+            paste("coefficient of variation ",var1," : ", round(sqrt(var(data1))/mean(data1),digits=2)), paste("coefficient of variation ",var2," : ", round(sqrt(var(data2))/mean(data2),digits=2)), "",
+            paste("interquartil  ",var1," : ", quantile(data1,0.75)-quantile(data1,0.25)), paste("interquartil ",var2," : ", quantile(data2,0.75)-quantile(data2,0.25)), "",
+            sep="<br/>"))
+    
+    
+    
+    
+    
+    
+  })
+  
+  
 })

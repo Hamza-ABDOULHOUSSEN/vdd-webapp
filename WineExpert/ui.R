@@ -18,7 +18,9 @@ dashboardPage(
       menuItem("Education de la mère", tabName = "medu", icon = icon("bar-chart-o")),
       menuItem("Education du père", tabName = "fedu", icon = icon("bar-chart-o")),
       menuItem("Qualité des relations familiales", tabName = "famrel", icon = icon("bar-chart-o")),
-      menuItem("Temps libre", tabName = "freetime", icon = icon("bar-chart-o"))
+      menuItem("Temps libre", tabName = "freetime", icon = icon("bar-chart-o")),
+      menuItem("Analyse_bivariee", tabName = "Analyse_bivariee", icon = icon("bar-chart-o")),
+      menuItem("unidimentional", tabName = "unidimentional", icon = icon("bar-chart-o"))
     )
   ),
   
@@ -236,7 +238,68 @@ dashboardPage(
                 htmlOutput("freetime_info")
               ),
               
+      ),
+      
+      ## Analyse bivariee
+      tabItem(tabName = "Analyse_bivariee",
+              h2("Correlation avec la moyenne"),
+              box(
+                title = "correlation", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                plotOutput("correlation")
+              ),
+              
+              box(
+                title = "Inputs", background = "black",
+                radioButtons(
+                  "variables",
+                  "variables",
+                  choices =  c(" age" = " age",
+                               "familly relation" = "famrel",
+                               "absences" = "absences",
+                               "notes"="G3"),
+                  selected = NULL,
+                  inline = FALSE,
+                  width = '800px'
+                ),
+                
+                radioButtons(
+                  "types",
+                  "types",
+                  choices =  c("Shapiro-Wilk" = " sw",
+                               "chi 2" = "ch"),
+                  selected = NULL,
+                  inline = FALSE,
+                  width = '800px'
+                )
+                
+              ),
+              
+              box(
+                title = "info", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                htmlOutput("analyse_info")
+              ),
+              
+      ),
+      
+      ## analyse unidimentionnelle
+      tabItem(tabName = "unidimentional",
+              h2("Analyse unidimentionelle"),
+              box(
+                title = "unidimentional", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                plotOutput("unidimentional")
+              ),
+              box(
+                title = "info on final grade", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                htmlOutput("univ_info")
+              ),
+              
+              
       )
+      
       
     )
   )
