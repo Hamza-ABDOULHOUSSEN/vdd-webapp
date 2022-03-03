@@ -11,13 +11,11 @@ dashboardPage(
   dashboardSidebar(
     sidebarMenu(
       menuItem("Home", tabName = "home", icon = icon("home")),
-      menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
       menuItem("Age", tabName = "age", icon = icon("bar-chart-o")),
       menuItem("Sexe", tabName = "sexe", icon = icon("bar-chart-o")),
       menuItem("Milieu d'habitation", tabName = "adress", icon = icon("bar-chart-o")),
       menuItem("Cohabitation des parents", tabName = "pstatus", icon = icon("bar-chart-o")),
-      menuItem("TD", icon = icon("th"), tabName = "TD",
-               badgeLabel = "new", badgeColor = "green")
+      menuItem("Education de la mère", tabName = "medu", icon = icon("bar-chart-o"))
     )
   ),
   
@@ -28,29 +26,31 @@ dashboardPage(
       ## HOME PAGE
       tabItem(tabName = "home",
               includeMarkdown("markdown/home.md"),
+              fileInput(
+                "file",
+                "charger un fichier",
+                multiple = FALSE,
+                accept = NULL,
+                width = NULL,
+                buttonLabel = "Browse...",
+                placeholder = "No file selected"
+              ),
               htmlOutput("home_info")
-      ),
-      
-      ## HISTOGRAMME
-      tabItem(tabName = "dashboard",
-              h2("Dashboard tab content"),
-              plotOutput("histo")
       ),
       
       ## AGE
       tabItem(tabName = "age",
               h2("Age"),
-              box(
-                title = "Age", status = "primary", solidHeader = TRUE,
-                collapsible = TRUE,
-                plotOutput("age")
+              tabBox(
+                tabPanel("Histogramme", plotOutput("age")),
+                tabPanel("Boîte à moustache", plotOutput("age_bam"))
               ),
               box(
                 title = "Inputs", background = "black",
                 radioButtons(
                   "age",
-                  "age",
-                  choices =  c("les deux" = "both",
+                  "Age",
+                  choices =  c("Total" = "both",
                                "15" = 15,
                                "16" = 16,
                                "17" = 17),
@@ -58,8 +58,12 @@ dashboardPage(
                   inline = FALSE,
                   width = '800px'
                 )
-                
-              )
+              ),
+              box(
+                title = "info", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                htmlOutput("age_info")
+              ),
               
       ),
       
@@ -75,7 +79,7 @@ dashboardPage(
                 radioButtons(
                   "sexe",
                   "sexe",
-                  choices =  c("les deux" = "both",
+                  choices =  c("Total" = "both",
                                "Homme" = "M",
                                "Femme" = "F"),
                   selected = NULL,
@@ -147,52 +151,27 @@ dashboardPage(
               
       ),
       
-      ## TD PAGE
-      tabItem(tabName = "TD",
-              h2("TD"),
-              
-              box(
-                title = "Gauss", status = "primary", solidHeader = TRUE,
-                collapsible = TRUE,
-                plotOutput("gaussienne")
-              ),
-              box(
-                title = "Sinus", status = "primary", solidHeader = TRUE,
-                collapsible = TRUE,
-                plotOutput("sinus")
+      ## MOTHER EDUCATION
+      tabItem(tabName = "medu",
+              h2("Education de la mère"),
+              tabBox(
+                tabPanel("Histogramme", plotOutput("medu")),
+                tabPanel("Boîte à moustache", plotOutput("medu_bam"))
               ),
               box(
                 title = "Inputs", background = "black",
-                numericInput(
-                  "n",
-                  "n",
-                  value=25,
-                  min = 0,
-                  max = NA,
-                  step = 1,
-                  width = NULL
-                ),
-                checkboxInput("check", "relier les points", value = FALSE, width = NULL),
-                radioButtons(
-                  "button",
-                  "couleurs",
-                  choices =  c("rouge" = "red",
-                               "vert" = "green",
-                               "bleu" = "blue"),
-                  selected = NULL,
-                  inline = FALSE,
-                  width = NULL
-                ),
-                sliderInput("epaisseur", "Decimal:",
-                            min = 1, max = 5,
-                            value = 0.5, step = 0.1
-                ),
-                
-                # Button
-                downloadButton("downloadImage", "Download")
-              )
+                sliderInput("niveau d'education (0 faible)", "medu",
+                            min = 0, max = 5,
+                            value = 0),
+              ),
+              box(
+                title = "info", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE,
+                htmlOutput("medu_info")
+              ),
               
       )
+      
     )
   )
   
