@@ -20,7 +20,7 @@ dashboardPage(
       menuItem("Qualité des relations familiales", tabName = "famrel", icon = icon("bar-chart-o")),
       menuItem("Temps libre", tabName = "freetime", icon = icon("bar-chart-o")),
       menuItem("Analyse_bivariee", tabName = "Analyse_bivariee", icon = icon("bar-chart-o")),
-      menuItem("unidimentional", tabName = "unidimentional", icon = icon("bar-chart-o")),
+      menuItem("unidimentional", tabName = "unidimentional", icon = icon("bar-chart-o"))
     )
   ),
   
@@ -42,7 +42,7 @@ dashboardPage(
               ),
               htmlOutput("home_info")
       ),
-
+      
       ## AGE
       tabItem(tabName = "age",
               h2("Age"),
@@ -100,7 +100,6 @@ dashboardPage(
               
       ),
       
-      
       ## ADRESSE
       tabItem(tabName = "adress",
               h2("Milieu d'habitation Rural ou Urbain"),
@@ -126,9 +125,9 @@ dashboardPage(
                 collapsible = TRUE,
                 htmlOutput("adress_info")
               ),
-
+              
       ),
-
+      
       ## COHABITATION DES PARENTS
       tabItem(tabName = "pstatus",
               h2("Cohabitation des parents Ensemble ou Séparés"),
@@ -154,9 +153,9 @@ dashboardPage(
                 collapsible = TRUE,
                 htmlOutput("pstatus_info")
               ),
-
+              
       ),
-
+      
       ## MOTHER EDUCATION
       tabItem(tabName = "medu",
               h2("Education de la mère"),
@@ -175,9 +174,9 @@ dashboardPage(
                 collapsible = TRUE,
                 htmlOutput("medu_info")
               ),
-
+              
       ),
-
+      
       ## FATHER EDUCATION
       tabItem(tabName = "fedu",
               h2("Education du père"),
@@ -196,9 +195,9 @@ dashboardPage(
                 collapsible = TRUE,
                 htmlOutput("fedu_info")
               ),
-
+              
       ),
-
+      
       ## FAMREL
       tabItem(tabName = "famrel",
               h2("Qualité des relations familiales"),
@@ -217,9 +216,9 @@ dashboardPage(
                 collapsible = TRUE,
                 htmlOutput("famrel_info")
               ),
-
+              
       ),
-
+      
       ## FREETIME
       tabItem(tabName = "freetime",
               h2("Temps libre après les cours"),
@@ -240,7 +239,7 @@ dashboardPage(
               ),
               
       ),
-
+      
       ## Analyse bivariee
       tabItem(tabName = "Analyse_bivariee",
               h2("Correlation avec la moyenne"),
@@ -249,7 +248,7 @@ dashboardPage(
                 collapsible = TRUE,
                 plotOutput("correlation")
               ),
-
+              
               box(
                 title = "Inputs", background = "black",
                 radioButtons(
@@ -263,7 +262,7 @@ dashboardPage(
                   inline = FALSE,
                   width = '800px'
                 ),
-
+                
                 radioButtons(
                   "types",
                   "types",
@@ -273,17 +272,17 @@ dashboardPage(
                   inline = FALSE,
                   width = '800px'
                 )
-
+                
               ),
-
+              
               box(
                 title = "info", status = "primary", solidHeader = TRUE,
                 collapsible = TRUE,
                 htmlOutput("analyse_info")
               ),
-
+              
       ),
-
+      
       ## analyse unidimentionnelle
       tabItem(tabName = "unidimentional",
               h2("Analyse unidimentionelle"),
@@ -297,10 +296,11 @@ dashboardPage(
                 collapsible = TRUE,
                 htmlOutput("univ_info")
               ),
-
-
+              
+              
       )
-
+      
+      
     )
   )
   
