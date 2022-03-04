@@ -67,7 +67,7 @@ shinyServer ( function (input , output ) {
     
     sub = subset(student, age == variable)
     data = sub$G3
-    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
   })
   
   output$age_bam <- renderPlot({
@@ -82,7 +82,7 @@ shinyServer ( function (input , output ) {
     
     sub = subset(student, age == variable)
     data = sub$G3
-    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0, 20, 1))
+    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0, 20, 1)) + xlim(0,20)
   })
   
   output$age_info <- renderText({
@@ -118,7 +118,7 @@ shinyServer ( function (input , output ) {
     variable = input$sexe
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=sex, color=sex)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(student, aes(G3, fill=sex, color=sex)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
     else {
       
@@ -131,7 +131,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, sex == variable)
       data = sub$G3
-      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
   })
   
@@ -142,7 +142,7 @@ shinyServer ( function (input , output ) {
     variable = input$sexe
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=sex, color=sex)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3, fill=sex, color=sex)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
     else {
       
@@ -155,7 +155,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, sex == variable)
       data = sub$G3
-      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
   })
   
@@ -225,7 +225,7 @@ shinyServer ( function (input , output ) {
     variable = input$adress
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=address, color=address)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(student, aes(G3, fill=address, color=address)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
     else {
       
@@ -238,7 +238,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, address == variable)
       data = sub$G3
-      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
   })
   
@@ -249,7 +249,7 @@ shinyServer ( function (input , output ) {
     variable = input$adress
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=address, color=address)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3, fill=address, color=address)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
     else {
       
@@ -262,7 +262,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, address == variable)
       data = sub$G3
-      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
   })
   
@@ -296,7 +296,7 @@ shinyServer ( function (input , output ) {
     variable = input$pstatus
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=Pstatus, color=Pstatus)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(student, aes(G3, fill=Pstatus, color=Pstatus)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
     else {
       
@@ -309,7 +309,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, Pstatus == variable)
       data = sub$G3
-      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
   })
   
@@ -320,7 +320,7 @@ shinyServer ( function (input , output ) {
     variable = input$pstatus
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=Pstatus, color=Pstatus)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3, fill=Pstatus, color=Pstatus)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
     else {
       
@@ -333,7 +333,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, Pstatus == variable)
       data = sub$G3
-      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
   })
   
@@ -370,7 +370,7 @@ shinyServer ( function (input , output ) {
 
     sub = subset(student, Medu == variable)
     data = sub$G3
-    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     })
   
   output$medu_bam <- renderPlot({
@@ -383,7 +383,7 @@ shinyServer ( function (input , output ) {
     
     sub = subset(student, Medu == variable)
     data = sub$G3
-    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
   })
   
   output$medu_info <- renderText({ 
@@ -418,7 +418,7 @@ shinyServer ( function (input , output ) {
     
     sub = subset(student, Fedu == variable)
     data = sub$G3
-    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
   })
   
   output$fedu_bam <- renderPlot({
@@ -431,7 +431,7 @@ shinyServer ( function (input , output ) {
     
     sub = subset(student, Fedu == variable)
     data = sub$G3
-    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
   })
   
   output$fedu_info <- renderText({ 
@@ -466,7 +466,7 @@ shinyServer ( function (input , output ) {
     
     sub = subset(student, famrel == variable)
     data = sub$G3
-    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
   })
   
   output$famrel_bam <- renderPlot({
@@ -479,7 +479,7 @@ shinyServer ( function (input , output ) {
     
     sub = subset(student, famrel == variable)
     data = sub$G3
-    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
   })
   
   output$famrel_info <- renderText({ 
@@ -517,7 +517,7 @@ shinyServer ( function (input , output ) {
     
     sub = subset(student, freetime == variable)
     data = sub$G3
-    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
   })
   
   output$freetime_bam <- renderPlot({
@@ -532,7 +532,7 @@ shinyServer ( function (input , output ) {
     
     sub = subset(student, freetime == variable)
     data = sub$G3
-    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0, 20, 1))
+    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0, 20, 1)) + xlim(0,20)
   })
   
   output$freetime_info <- renderText({
@@ -572,7 +572,7 @@ shinyServer ( function (input , output ) {
     
     sub = subset(student, goout == variable)
     data = sub$G3
-    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
   })
   
   output$goout_bam <- renderPlot({
@@ -587,7 +587,7 @@ shinyServer ( function (input , output ) {
     
     sub = subset(student, goout == variable)
     data = sub$G3
-    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0, 20, 1))
+    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0, 20, 1)) + xlim(0,20)
   })
   
   output$goout_info <- renderText({
@@ -627,7 +627,7 @@ shinyServer ( function (input , output ) {
     
     sub = subset(student, Dalc == variable)
     data = sub$G3
-    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
   })
   
   output$Dalc_bam <- renderPlot({
@@ -642,7 +642,7 @@ shinyServer ( function (input , output ) {
     
     sub = subset(student, Dalc == variable)
     data = sub$G3
-    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0, 20, 1))
+    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0, 20, 1)) + xlim(0,20)
   })
   
   output$Dalc_info <- renderText({
@@ -682,7 +682,7 @@ shinyServer ( function (input , output ) {
     
     sub = subset(student, Walc == variable)
     data = sub$G3
-    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
   })
   
   output$Walc_bam <- renderPlot({
@@ -697,7 +697,7 @@ shinyServer ( function (input , output ) {
     
     sub = subset(student, Walc == variable)
     data = sub$G3
-    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0, 20, 1))
+    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0, 20, 1)) + xlim(0,20)
   })
   
   output$Walc_info <- renderText({
@@ -737,7 +737,7 @@ shinyServer ( function (input , output ) {
     
     sub = subset(student, health == variable)
     data = sub$G3
-    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+    ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
   })
   
   output$health_bam <- renderPlot({
@@ -752,7 +752,7 @@ shinyServer ( function (input , output ) {
     
     sub = subset(student, health == variable)
     data = sub$G3
-    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0, 20, 1))
+    ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0, 20, 1)) + xlim(0,20)
   })
   
   output$health_info <- renderText({
@@ -787,7 +787,7 @@ shinyServer ( function (input , output ) {
     variable = input$schoolsup
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=schoolsup, color=schoolsup)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(student, aes(G3, fill=schoolsup, color=schoolsup)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
     else {
       
@@ -800,7 +800,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, schoolsup == variable)
       data = sub$G3
-      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
   })
   
@@ -811,7 +811,7 @@ shinyServer ( function (input , output ) {
     variable = input$schoolsup
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=schoolsup, color=schoolsup)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3, fill=schoolsup, color=schoolsup)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
     else {
       
@@ -824,7 +824,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, schoolsup == variable)
       data = sub$G3
-      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
   })
   
@@ -859,7 +859,7 @@ shinyServer ( function (input , output ) {
     variable = input$famsup
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=famsup, color=famsup)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(student, aes(G3, fill=famsup, color=famsup)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
     else {
       
@@ -872,7 +872,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, famsup == variable)
       data = sub$G3
-      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
   })
   
@@ -883,7 +883,7 @@ shinyServer ( function (input , output ) {
     variable = input$famsup
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=famsup, color=famsup)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3, fill=famsup, color=famsup)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
     else {
       
@@ -896,7 +896,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, famsup == variable)
       data = sub$G3
-      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
   })
   
@@ -931,7 +931,7 @@ shinyServer ( function (input , output ) {
     variable = input$paid
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=paid, color=paid)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(student, aes(G3, fill=paid, color=paid)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
     else {
       
@@ -944,7 +944,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, paid == variable)
       data = sub$G3
-      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
   })
   
@@ -955,7 +955,7 @@ shinyServer ( function (input , output ) {
     variable = input$paid
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=paid, color=paid)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3, fill=paid, color=paid)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
     else {
       
@@ -968,7 +968,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, paid == variable)
       data = sub$G3
-      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
   })
   
@@ -1003,7 +1003,7 @@ shinyServer ( function (input , output ) {
     variable = input$activities
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=activities, color=activities)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(student, aes(G3, fill=activities, color=activities)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
     else {
       
@@ -1016,7 +1016,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, activities == variable)
       data = sub$G3
-      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
   })
   
@@ -1027,7 +1027,7 @@ shinyServer ( function (input , output ) {
     variable = input$activities
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=activities, color=activities)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3, fill=activities, color=activities)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
     else {
       
@@ -1040,7 +1040,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, activities == variable)
       data = sub$G3
-      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
   })
   
@@ -1075,7 +1075,7 @@ shinyServer ( function (input , output ) {
     variable = input$nursery
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=nursery, color=nursery)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(student, aes(G3, fill=nursery, color=nursery)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
     else {
       
@@ -1088,7 +1088,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, nursery == variable)
       data = sub$G3
-      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
   })
   
@@ -1099,7 +1099,7 @@ shinyServer ( function (input , output ) {
     variable = input$nursery
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=nursery, color=nursery)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3, fill=nursery, color=nursery)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
     else {
       
@@ -1112,7 +1112,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, nursery == variable)
       data = sub$G3
-      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
   })
   
@@ -1147,7 +1147,7 @@ shinyServer ( function (input , output ) {
     variable = input$higher
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=higher, color=higher)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(student, aes(G3, fill=higher, color=higher)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
     else {
       
@@ -1160,7 +1160,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, higher == variable)
       data = sub$G3
-      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
   })
   
@@ -1171,7 +1171,7 @@ shinyServer ( function (input , output ) {
     variable = input$higher
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=higher, color=higher)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3, fill=higher, color=higher)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
     else {
       
@@ -1184,7 +1184,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, higher == variable)
       data = sub$G3
-      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
   })
   
@@ -1219,7 +1219,7 @@ shinyServer ( function (input , output ) {
     variable = input$internet
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=internet, color=internet)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(student, aes(G3, fill=internet, color=internet)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
     else {
       
@@ -1232,7 +1232,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, internet == variable)
       data = sub$G3
-      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
   })
   
@@ -1243,7 +1243,7 @@ shinyServer ( function (input , output ) {
     variable = input$internet
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=internet, color=internet)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3, fill=internet, color=internet)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
     else {
       
@@ -1256,7 +1256,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, internet == variable)
       data = sub$G3
-      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
   })
   
@@ -1291,7 +1291,7 @@ shinyServer ( function (input , output ) {
     variable = input$romantic
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=romantic, color=romantic)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(student, aes(G3, fill=romantic, color=romantic)) + geom_histogram(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
     else {
       
@@ -1304,7 +1304,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, romantic == variable)
       data = sub$G3
-      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + scale_y_continuous(name="Nombre d'élève")
+      ggplot(sub, aes(G3)) + geom_histogram(data=sub, fill=couleur) + geom_vline(xintercept = mean(data), colour = couleur, linetype = "longdash") + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20) + scale_y_continuous(name="Nombre d'élève") + xlim(0,20)
     }
   })
   
@@ -1315,7 +1315,7 @@ shinyServer ( function (input , output ) {
     variable = input$romantic
     
     if (variable == "both") {
-      ggplot(student, aes(G3, fill=romantic, color=romantic)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3, fill=romantic, color=romantic)) + geom_boxplot(alpha=0.8) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
     else {
       
@@ -1328,7 +1328,7 @@ shinyServer ( function (input , output ) {
       
       sub = subset(student, romantic == variable)
       data = sub$G3
-      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+      ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1)) + xlim(0,20)
     }
   })
   
