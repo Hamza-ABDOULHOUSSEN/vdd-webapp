@@ -5,7 +5,7 @@ library(markdown)
 dashboardPage(
   
   ## HEADER
-  dashboardHeader(title = "Basic dashboard"),
+  dashboardHeader(title = "StudentExpert"),
   
   ## SIDEBAR
   dashboardSidebar(
