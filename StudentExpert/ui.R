@@ -86,7 +86,8 @@ dashboardPage(
               h2("Sexe homme ou femme"),
               tabBox(
                 tabPanel("Histogramme", plotOutput("sexe")),
-                tabPanel("Boîte à moustache", plotOutput("sexe_bam"))
+                tabPanel("Boîte à moustache", plotOutput("sexe_bam")),
+                tabPanel("Progression", plotOutput("sexe_pro"))
               ),
               box(
                 title = "Inputs", background = "black",
@@ -96,6 +97,15 @@ dashboardPage(
                   choices =  c("Total" = "both",
                                "Homme" = "M",
                                "Femme" = "F"),
+                  selected = NULL,
+                  inline = FALSE,
+                  width = '800px'
+                ),
+                radioButtons(
+                  "reg",
+                  "Regression",
+                  choices =  c("oui" = "yes",
+                               "non" = "no"),
                   selected = NULL,
                   inline = FALSE,
                   width = '800px'

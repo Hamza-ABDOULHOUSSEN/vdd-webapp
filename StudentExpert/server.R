@@ -95,6 +95,7 @@ shinyServer ( function (input , output ) {
     var1 = ""
     sub1 = subset(student, age == input$age)
     data1 = sub1$G3
+    correl = cor(student$age, student$failures)
     
     HTML(
       paste(titre,
@@ -104,7 +105,8 @@ shinyServer ( function (input , output ) {
             paste("1er quartile  ", var1, " : ", quantile(data1, 0.25)),
             paste("mediane ", var1, " : ", median(data1)),
             paste("3eme quartile  ", var1, " : ", quantile(data1, 0.75)),
-            paste("max ", var1, " : ", max(data1)),
+            paste("max ", var1, " : ", max(data1)), "",
+            paste("correlation : ", round(correl,2)),
             sep="<br/>"))
   })
   
@@ -154,6 +156,42 @@ shinyServer ( function (input , output ) {
       sub = subset(student, sex == variable)
       data = sub$G3
       ggplot(student, aes(G3)) + geom_boxplot(data=sub, fill=couleur) + scale_x_continuous(name="Résultat final", breaks=seq(0,20,1))
+    }
+  })
+  
+  output$sexe_pro <- renderPlot({
+    if (is.null(input$file)) {return(NULL)}
+    
+    student <- read.table(input$file$datapath, sep=";",header=TRUE)
+    variable = input$sexe
+    
+    if (variable == "both") {
+      if (input$reg == "yes") {
+        ggplot(student, aes(x=G1, y=G2, color=sex)) + geom_point() + xlim(0,20) + ylim(0,20) + geom_smooth(method=lm)
+      }
+      else {
+        ggplot(student, aes(x=G1, y=G2, color=sex)) + geom_point() + xlim(0,20) + ylim(0,20)
+      }
+      
+    }
+    else {
+      
+      if (variable == "F") {
+        couleur = "#F8766D"
+      }
+      else {
+        couleur = "#00BFC4"
+      }
+      
+      sub = subset(student, sex == variable)
+      data = sub$G3
+      if (input$reg == "yes") {
+        ggplot(sub, aes(x=G1, y=G2, color=sex)) + geom_point() + xlim(0,20) + ylim(0,20) + geom_smooth(method=lm)
+      }
+      else {
+        ggplot(sub, aes(x=G1, y=G2, color=sex)) + geom_point() + xlim(0,20) + ylim(0,20)
+      }
+      
     }
   })
   
